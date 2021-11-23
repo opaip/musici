@@ -1,6 +1,7 @@
 import requests
 import youtube_dl
 import os
+import sys
 def spotify():
     os.system('cls')
     while True:
@@ -18,37 +19,58 @@ def spotify():
         if inn=='/exit':
             break
 def youtube():
-    os.system('cls')
-    ydl_opts = {
-    'format': 'bestaudio/best',
-    'postprocessors': [{
-        'key': 'FFmpegExtractAudio',
-        'preferredcodec': 'mp3',
-        'preferredquality': '192',
+    while True:    
+        os.system('cls')
+        ydl_opts = {
+        'format': 'bestaudio/best',
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'mp3',
+            'preferredquality': '192',
 
-    }],
-}
-    name = input('music name :>> ')
-    result = requests.get(f'https://youtube.googleapis.com/youtube/v3/search?q={name}&maxResults=1&key=AIzaSyAOw0wToDhyqx693bhLEkIk2TY4g8ec4n8').json()
-    data = result
-    data = data['items'][0]['id']['videoId']
-    url = f'https://youtube.com/watch?v={data}'
-    print(f'link : {url}')
-    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        try:
-            ydl.download([url])
-            print('successfully downloaded')
-        except:
-            print('downloadind faild try vpn')
-        input('Enter for bcak to menu >>' )
-    
-while True:
+        }],
+    }
+        name = input('music name :>> ')
+        if name == '/exit':
+            break
+        result = requests.get(f'https://youtube.googleapis.com/youtube/v3/search?q={name}&maxResults=1&key=AIzaSyAOw0wToDhyqx693bhLEkIk2TY4g8ec4n8').json()
+        data = result
+        data = data['items'][0]['id']['videoId']
+        url = f'https://youtube.com/watch?v={data}'
+        print(f'link : {url}')
+        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+            try:
+                ydl.download([url])
+                print('successfully downloaded')
+            except:
+                print('downloadind faild try vpn')
+            input('Enter for bcak to menu >>' )
+
+def banner():
     os.system('cls')
-    plat = input('select your platform : [1]spotify  [2]youtube >> ')
+    print('''
++}-----------------------{+
+     -----WELCOME-----
+
+         [1] SPOTIFY
+         [2] YOUTUBE
+         [3] EXIT
+         
++}-----------------------{+     
+''')
+
+
+while True:
+    banner()
+    plat = input('select your platform >>  ')
     if plat == '1':
         spotify()
-    else:
+    elif plat == '2':
         youtube()
+    elif plat == '3':
+        sys.exit()
+    else:
+        print('unknown number !! ')
     
 
     
