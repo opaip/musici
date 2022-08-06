@@ -2,6 +2,9 @@ import requests
 import youtube_dl
 import os
 import sys
+
+api="your youtube api key"
+
 def spotify():
     os.system('cls')
     while True:
@@ -33,7 +36,7 @@ def youtube():
         name = input('music name :>> ')
         if name == '/exit':
             break
-        result = requests.get(f'https://youtube.googleapis.com/youtube/v3/search?q={name}&maxResults=1&key=AIzaSyAOw0wToDhyqx693bhLEkIk2TY4g8ec4n8').json()
+        result = requests.get(f'https://youtube.googleapis.com/youtube/v3/search?q={name}&maxResults=1&key={api}').json()
         data = result
         data = data['items'][0]['id']['videoId']
         url = f'https://youtube.com/watch?v={data}'
