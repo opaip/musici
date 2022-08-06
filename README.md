@@ -5,7 +5,7 @@ an open source app for finding music and downloading
 * if you werent seccessful for downloing from youtube try vpn
 
 # installation
-for download ypu can use : 
+for download you can use : 
 git clone https://github.com/DelfTeam/musici
 in your terminal
 
